@@ -1,11 +1,5 @@
 let galleryElement = document.getElementById('champGallery');
 
-
-// let newH3 = document.createElement("h3");
-// newH3.innerText = "Hello world";
-// galleryElement.appendChild(newH3);
-
-
 let champJSON = [
   {
     "epithet": "THE LADY OF LUMINOSITY",
@@ -225,13 +219,14 @@ let champJSON = [
   }
 ];
 
-// createSection(champJSON[0]);
-
 for (let i = 0; i < champJSON.length; i++) {
   createSection(champJSON[i]);
 }
 
+AOS.init();
+
 function createSection(incomingJSON) {
+
   let newSection = document.createElement("DIV");
   newSection.style.backgroundColor = incomingJSON['bgColor'];
   newSection.style.backgroundImage = incomingJSON['imgUrl'];
@@ -244,11 +239,13 @@ function createSection(incomingJSON) {
   let newH3 = document.createElement("h3");
   newH3.innerText = incomingJSON['epithet'];
   newH3.classList.add('epithet');
+  newH3.setAttribute("data-aos", "fade-right");
   textDiv.appendChild(newH3);
 
   let newH2 = document.createElement("h2");
   newH2.innerText = incomingJSON['name'];
   newH2.classList.add('name');
+  newH2.setAttribute("data-aos", "zoom-in");
   textDiv.appendChild(newH2);
 
   let newStoryDiv = document.createElement("DIV");
@@ -258,15 +255,18 @@ function createSection(incomingJSON) {
   let newStoryTitle = document.createElement("P");
   newStoryTitle.innerText = "Background Story: ";
   newStoryTitle.classList.add('subTitles');
+  newStoryTitle.setAttribute("data-aos", "zoom-in-right");
   newStoryDiv.appendChild(newStoryTitle);
 
   let newBgStory = document.createElement("P");
   newBgStory.innerText = incomingJSON['bgStory'];
+  newBgStory.setAttribute("data-aos", "zoom-in-right");
   newBgStory.classList.add('bgStory');
   newStoryDiv.appendChild(newBgStory);
 
   let newDiffLvl = document.createElement("DIV");
   newDiffLvl.classList.add('difficulty');
+  newDiffLvl.setAttribute("data-aos", "zoom-out");
   textDiv.appendChild(newDiffLvl);
 
   let newDiffTitle = document.createElement("P");
@@ -299,6 +299,13 @@ function createSection(incomingJSON) {
   for (let i=0; i<5; i++) {
     let newAbiDiv = document.createElement("DIV");
     newAbiDiv.classList.add('abilityContainer');
+    newAbiDiv.setAttribute("data-aos", "fade-down");
+    newAbiDiv.setAttribute("data-aos-duration", "1500");
+    newAbiDiv.setAttribute("data-aos-anchor-placement", "bottom-bottom");
+
+    let order = 200 * i;
+
+    newAbiDiv.setAttribute("data-aos-delay", order);
     newAbiContent.appendChild(newAbiDiv);
 
     let newAbiLeft = document.createElement("DIV");
@@ -329,7 +336,7 @@ function createSection(incomingJSON) {
     newAbiTextDiv.appendChild(newAbiInfo);
   }
 
-
+  var rellax = new Rellax('.rellax');
 
   galleryElement.appendChild(newSection);
 }
